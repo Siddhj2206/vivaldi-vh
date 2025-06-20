@@ -1,6 +1,8 @@
 @use "../variables";
 
 @mixin styles {
-  @include variables.mixin-highlight-toolbar-component-in-toolbar-editor(#{variables.$select-flexible-space});
-	// This is meant to make flexible spaces more obvious in the toolbar editor when universal flex-grow is enabled.
+    @include variables.mixin-highlight-toolbar-component-in-toolbar-editor(
+        #{variables.$select-flexible-space}
+    );
+    // This is meant to make flexible spaces more obvious in the toolbar editor when universal flex-grow is enabled.
 }

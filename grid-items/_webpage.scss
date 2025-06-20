@@ -1,33 +1,33 @@
 @use "../variables";
 
 @mixin styles {
-  #webpage-stack {
-    -webkit-app-region: drag;
+    #webpage-stack {
+        -webkit-app-region: drag;
 
-    .webpageview,
-    .SlideBar {
-      -webkit-app-region: no-drag;
+        .webpageview,
+        .SlideBar {
+            -webkit-app-region: no-drag;
+        }
     }
-  }
 
-  #panels-container.overlay:not(.minimized).button.right ~ div:last-of-type {
-    margin-right: 0; // This exact selector normally sets margin-right to 10px, presumably in an attempt to account for the panel toggle. (last observed on 5.8.2978.3)
-  }
+    #panels-container.overlay:not(.minimized).button.right ~ div:last-of-type {
+        margin-right: 0; // This exact selector normally sets margin-right to 10px, presumably in an attempt to account for the panel toggle. (last observed on 5.8.2978.3)
+    }
 }
 
 @mixin permanent-padding {
-  #{variables.$select-webpage}:not(:has(#webpage-stack .tiled.visible)) {
-    padding: variables.$value-of-webview-container-has-mosaic-padding;
-    box-shadow: inset 0 0 0 8px var(--colorBgDarker);
+    #{variables.$select-webpage}:not(:has(#webpage-stack .tiled.visible)) {
+        padding: variables.$value-of-webview-container-has-mosaic-padding;
+        box-shadow: inset 0 0 0 8px var(--colorBgDarker);
 
-    .webpageview.visible {
-      margin: variables.$value-of-mosaic-tile-margin;
-      border-radius: var(--radiusCap);
-      box-shadow: 0 0 0 2px var(--colorBorder);
+        .webpageview.visible {
+            margin: variables.$value-of-mosaic-tile-margin;
+            border-radius: var(--radiusCap);
+            box-shadow: 0 0 0 2px var(--colorBorder);
 
-      > .row-wrapper {
-        border-radius: var(--radiusCap);
-      }
+            > .row-wrapper {
+                border-radius: var(--radiusCap);
+            }
+        }
     }
-  }
 }

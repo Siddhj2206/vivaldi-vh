@@ -3,85 +3,88 @@
 // This file collects reused styles to maintain consistency.
 
 @mixin extend-on-focus($element, $text-input) {
-  #browser {
-    &.tabs-left,
-    &.tabs-off:has(#{selectors.$panel}.left) {
-      &:not(.address-top-off, .address-bottom-off) #{selectors.$address-bar},
-      #{selectors.$footer-has-status-bar} {
-        #{$element}:has(#{$text-input}:focus) {
-          margin-right: var(
-            --vvh-input-field-extend-on-focus-margin
-          ) !important; // temporarily override auto margins from address bar partial
+    #browser {
+        &.tabs-left,
+        &.tabs-off:has(#{selectors.$panel}.left) {
+            &:not(.address-top-off, .address-bottom-off)
+                #{selectors.$address-bar},
+            #{selectors.$footer-has-status-bar} {
+                #{$element}:has(#{$text-input}:focus) {
+                    margin-right: var(
+                        --vvh-input-field-extend-on-focus-margin
+                    ) !important; // temporarily override auto margins from address bar partial
+                }
+            }
         }
-      }
-    }
 
-    &.tabs-right,
-    &.tabs-off:has(#{selectors.$panel}.right) {
-      &:not(.address-top-off, .address-bottom-off) #{selectors.$address-bar},
-      #{selectors.$footer-has-status-bar} {
-        #{$element}:has(#{$text-input}:focus) {
-          margin-left: var(
-            --vvh-input-field-extend-on-focus-margin
-          ) !important; // temporarily override auto margins from address bar partial
+        &.tabs-right,
+        &.tabs-off:has(#{selectors.$panel}.right) {
+            &:not(.address-top-off, .address-bottom-off)
+                #{selectors.$address-bar},
+            #{selectors.$footer-has-status-bar} {
+                #{$element}:has(#{$text-input}:focus) {
+                    margin-left: var(
+                        --vvh-input-field-extend-on-focus-margin
+                    ) !important; // temporarily override auto margins from address bar partial
+                }
+            }
         }
-      }
-    }
-  }
-
-  $transition-duration: 0.2s;
-  
-  #{selectors.$address-bar},
-  #{selectors.$footer-has-status-bar} {
-    &:has(#{$element} #{$text-input}) {
-      transition: z-index 0s #{$transition-duration}; // delays z-index change in _grid-layout.scss by the transition duration
     }
 
-    &:has(#{$element} #{$text-input}:focus) {
-      transition: z-index 0s 0s;
-    }
-  }
+    $transition-duration: 0.2s;
 
-  #{$element} {
-    transition: margin cubic-bezier(0, 1, 0.25, 1) #{$transition-duration},
-      flex-basis cubic-bezier(0, 1, 0.25, 1) #{$transition-duration};
+    #{selectors.$address-bar},
+    #{selectors.$footer-has-status-bar} {
+        &:has(#{$element} #{$text-input}) {
+            transition: z-index 0s #{$transition-duration}; // delays z-index change in _grid-layout.scss by the transition duration
+        }
 
-    &:has(#{$text-input}:focus) {
-      flex-basis: 100vw !important;
-      box-shadow: 0 0 16px 1px var(--colorBorder);
+        &:has(#{$element} #{$text-input}:focus) {
+            transition: z-index 0s 0s;
+        }
     }
-  }
+
+    #{$element} {
+        transition:
+            margin cubic-bezier(0, 1, 0.25, 1) #{$transition-duration},
+            flex-basis cubic-bezier(0, 1, 0.25, 1) #{$transition-duration};
+
+        &:has(#{$text-input}:focus) {
+            flex-basis: 100vw !important;
+            box-shadow: 0 0 16px 1px var(--colorBorder);
+        }
+    }
 }
 
 @mixin highlight-toolbar-component-in-toolbar-editor($selector) {
-  #browser.toolbar-edit-mode #{$selector} {
-    opacity: 0.5;
+    #browser.toolbar-edit-mode #{$selector} {
+        opacity: 0.5;
 
-    > button::before {
-      content: " ";
-      pointer-events: none;
-      position: absolute;
-      inset: 0;
-      border: 1px dashed;
-      border-radius: var(--radius);
+        > button::before {
+            content: " ";
+            pointer-events: none;
+            position: absolute;
+            inset: 0;
+            border: 1px dashed;
+            border-radius: var(--radius);
+        }
     }
-  }
 }
 
 @mixin fade-in-on-hover {
-  animation: 0.5s linear fadeInOnHover;
+    animation: 0.5s linear fadeInOnHover;
 
-  @keyframes fadeInOnHover {
-    0% {
-      opacity: 0;
+    @keyframes fadeInOnHover {
+        0% {
+            opacity: 0;
+        }
+        99% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
     }
-    99% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
 }
 
 $-command-chain-flag-namespace: "vvh-";
@@ -89,43 +92,50 @@ $-command-chain-flag-prefix-enable: "#{$-command-chain-flag-namespace}enable-";
 $-command-chain-flag-prefix-disable: "#{$-command-chain-flag-namespace}disable-";
 
 @mixin bind-command-chain-flag($flag, $enabled-by-default: false) {
-  @if $enabled-by-default {
-    @include does-not-exist(#{$-command-chain-flag-prefix-disable}#{$flag}) {
-      @content;
-    }
-  } @else {
-    @include exists(#{$-command-chain-flag-prefix-enable}#{$flag}) {
-      @include does-not-exist(#{$-command-chain-flag-prefix-disable}#{$flag}) {
-        @content;
-      }
-    }
-  }
-
-  @at-root {
-    #browser:not(.toolbar-edit-mode)
-      #{selectors.$command-chain-toolbar-component}:has(
-        button[title="#{$-command-chain-flag-prefix-enable}#{$flag}"],
-        button[title="#{$-command-chain-flag-prefix-disable}#{$flag}"]
-      ) {
-      display: none;
+    @if $enabled-by-default {
+        @include does-not-exist(
+            #{$-command-chain-flag-prefix-disable}#{$flag}
+        ) {
+            @content;
+        }
+    } @else {
+        @include exists(#{$-command-chain-flag-prefix-enable}#{$flag}) {
+            @include does-not-exist(
+                #{$-command-chain-flag-prefix-disable}#{$flag}
+            ) {
+                @content;
+            }
+        }
     }
 
-    @include highlight-toolbar-component-in-toolbar-editor(
-      '#{selectors.$command-chain-toolbar-component}:has(button[title="#{$-command-chain-flag-prefix-enable}#{$flag}"], button[title="#{$-command-chain-flag-prefix-disable}#{$flag}"])'
-    );
-  }
+    @at-root {
+        #browser:not(.toolbar-edit-mode)
+            #{selectors.$command-chain-toolbar-component}:has(
+                button[title="#{$-command-chain-flag-prefix-enable}#{$flag}"],
+                button[title="#{$-command-chain-flag-prefix-disable}#{$flag}"]
+            ) {
+            display: none;
+        }
+
+        @include highlight-toolbar-component-in-toolbar-editor(
+            '#{selectors.$command-chain-toolbar-component}:has(button[title="#{$-command-chain-flag-prefix-enable}#{$flag}"], button[title="#{$-command-chain-flag-prefix-disable}#{$flag}"])'
+        );
+    }
 }
 
 @mixin exists($full-flag) {
-  > :has(:is(#{selectors.$editable-toolbars}) button[title="#{$full-flag}"]) {
-    @content;
-  }
+    > :has(:is(#{selectors.$editable-toolbars}) button[title="#{$full-flag}"]) {
+        @content;
+    }
 }
 
 @mixin does-not-exist($full-flag) {
-  > :not(
-      :has(:is(#{selectors.$editable-toolbars}) button[title="#{$full-flag}"])
-    ) {
-    @content;
-  }
+    > :not(
+            :has(
+                :is(#{selectors.$editable-toolbars})
+                    button[title="#{$full-flag}"]
+            )
+        ) {
+        @content;
+    }
 }

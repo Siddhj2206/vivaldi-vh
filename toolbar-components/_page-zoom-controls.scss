@@ -1,7 +1,7 @@
 @mixin styles {
-  .button-textonly {
-    &:has(.page-zoom-controls) {
-      justify-content: center;
+    .button-textonly {
+        &:has(.page-zoom-controls) {
+            justify-content: center;
+        }
     }
-  }
 }

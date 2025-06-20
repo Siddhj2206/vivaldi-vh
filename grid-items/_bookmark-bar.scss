@@ -1,13 +1,13 @@
 @use "../variables";
 
 @mixin styles {
-  // This positioning fixes the bookmark bar unnecessarily growing past the Pillar width when "Show Bookmark Bar" is initially toggled on.
-  #{variables.$select-bookmark-bar} {
-    position: relative;
+    // This positioning fixes the bookmark bar unnecessarily growing past the Pillar width when "Show Bookmark Bar" is initially toggled on.
+    #{variables.$select-bookmark-bar} {
+        position: relative;
 
-    .observer {
-      position: absolute;
-      inset: 0;
+        .observer {
+            position: absolute;
+            inset: 0;
+        }
     }
-  }
 }

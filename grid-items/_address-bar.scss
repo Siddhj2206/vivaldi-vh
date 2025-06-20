@@ -1,120 +1,108 @@
 @use "../variables";
 
 @mixin styles {
-  #{variables.$select-address-bar} {
-    flex-wrap: wrap;
-    height: auto;
-  }
-
-  #browser:not(.disable-titlebar) {
-    &.color-behind-tabs-on {
-      #{variables.$select-address-bar} {
-        background-color: var(--colorBg);
-      }
-    }
-    &.color-behind-tabs-off {
-      #{variables.$select-address-bar} {
-        background-color: var(--colorAccentBg);
-      }
-    }
-  }
-
-  #browser.disable-titlebar {
-    &:has(#{variables.$select-address-bar} .vivaldi .vivaldi-v) {
-      --vvh-address-bar-menu-button-width: 44px;
-    }
-
-    &:has(#{variables.$select-address-bar} .vivaldi .burger-icon) {
-      --vvh-address-bar-menu-button-width: 35px;
-    }
-
-    &.native {
-      &:not(.mac) {
-        --vvh-address-bar-window-buttons-width: var(
-          --vvh-address-bar-menu-button-width
-        ) !important; // override OS specific styles of #browser.disable-titlebar
-      }
-    }
-
-    &:not(.native) {
-      #{variables.$select-address-bar} .toolbar-extensions > .button-toolbar {
-        margin: 0 auto;
-      }
-    }
-
     #{variables.$select-address-bar} {
-      background: linear-gradient(
-          90deg,
-          transparent var(--vvh-address-bar-window-buttons-width),
-          var(--vvh-address-bar-background-color)
-            var(--vvh-address-bar-window-buttons-width)
-        ),
-        linear-gradient(
-          transparent variables.$value-of-address-bar-height,
-          var(--vvh-address-bar-background-color)
-            variables.$value-of-address-bar-height
-        );
-      padding: 0;
-      -webkit-app-region: drag;
-
-      &::before {
-        content: " ";
-        width: var(--vvh-address-bar-window-buttons-width);
-        height: variables.$value-of-address-bar-height;
-        border-radius: 0 0 var(--radius) 0;
-        border-bottom: 1px solid var(--colorBorder);
-        border-right: 1px solid var(--colorBorder);
-        margin: 0;
-      }
-
-      &::after {
-        content: " ";
-        position: absolute;
-        top: calc(
-          variables.$value-of-address-bar-height - var(--radius) + 1px
-        ); // add 1px to account for border of ::before element in address bar
-        left: calc(
-          var(--vvh-address-bar-window-buttons-width) - var(--radius) + 1px
-        );
-        z-index: 1;
-        height: var(--radius);
-        width: var(--radius);
-        background-color: var(--vvh-address-bar-background-color);
-        -webkit-mask-image: radial-gradient(
-          circle at 0 0,
-          rgba(0, 0, 0, 0) 70%,
-          #000 73%
-        );
-      }
-
-      .vivaldi,
-      .window-buttongroup {
-        position: absolute;
-        scale: unset;
-      }
-
-      .vivaldi {
-        margin: 0 !important; // overrides margin: 0 6px set by browser & overrides margins set by addressbar-universal-flex-grow
-
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.1);
-        }
-      }
-
-      .window-buttongroup {
-        border-radius: 0 0 var(--radius) 0;
-      }
+        flex-wrap: wrap;
+        height: auto;
     }
 
-    &.theme-dark {
-      #{variables.$select-address-bar} {
-        .vivaldi:hover {
-          background-color: rgba(255, 255, 255, 0.1);
+    #browser:not(.disable-titlebar) {
+        &.color-behind-tabs-on {
+            #{variables.$select-address-bar} {
+                background-color: var(--colorBg);
+            }
         }
-      }
+        &.color-behind-tabs-off {
+            #{variables.$select-address-bar} {
+                background-color: var(--colorAccentBg);
+            }
+        }
     }
 
-    /*
+    #browser.disable-titlebar {
+        &:has(#{variables.$select-address-bar} .vivaldi .vivaldi-v) {
+            --vvh-address-bar-menu-button-width: 44px;
+        }
+
+        &:has(#{variables.$select-address-bar} .vivaldi .burger-icon) {
+            --vvh-address-bar-menu-button-width: 35px;
+        }
+
+        &.native {
+            &:not(.mac) {
+                --vvh-address-bar-window-buttons-width: var(
+                    --vvh-address-bar-menu-button-width
+                ) !important; // override OS specific styles of #browser.disable-titlebar
+            }
+        }
+
+        &:not(.native) {
+            #{variables.$select-address-bar}
+                .toolbar-extensions
+                > .button-toolbar {
+                margin: 0 auto;
+            }
+        }
+
+        #{variables.$select-address-bar} {
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent var(--vvh-address-bar-window-buttons-width),
+                    var(--vvh-address-bar-background-color)
+                        var(--vvh-address-bar-window-buttons-width)
+                ),
+                linear-gradient(
+                    transparent variables.$value-of-address-bar-height,
+                    var(--vvh-address-bar-background-color)
+                        variables.$value-of-address-bar-height
+                );
+            padding: 0;
+            -webkit-app-region: drag;
+
+            &::before {
+                content: " ";
+                width: var(--vvh-address-bar-window-buttons-width);
+                height: variables.$value-of-address-bar-height;
+                border-radius: 0 0 var(--radius) 0;
+                border-bottom: 1px solid var(--colorBorder);
+                border-right: 1px solid var(--colorBorder);
+                margin: 0;
+            }
+
+            &::after {
+                content: " ";
+                position: absolute;
+                top: calc(
+                    variables.$value-of-address-bar-height - var(--radius) + 1px
+                ); // add 1px to account for border of ::before element in address bar
+                left: calc(
+                    var(--vvh-address-bar-window-buttons-width) - var(
+                            --radius
+                        ) +
+                        1px
+                );
+                z-index: 1;
+                height: var(--radius);
+                width: var(--radius);
+                background-color: var(--vvh-address-bar-background-color);
+                -webkit-mask-image: radial-gradient(
+                    circle at 0 0,
+                    rgba(0, 0, 0, 0) 70%,
+                    #000 73%
+                );
+            }
+        }
+
+        &.theme-dark {
+            #{variables.$select-address-bar} {
+                .vivaldi:hover {
+                    background-color: rgba(255, 255, 255, 0.1);
+                }
+            }
+        }
+
+        /*
     // Commented out to work around visual artifacts with backdrop-filter
 
     .mainbar::before {
@@ -122,196 +110,122 @@
     }
     */
 
-    // window button colors below
+        &.win {
+            --vvh-address-bar-window-buttons-width: calc(
+                var(--vvh-address-bar-menu-button-width) +
+                    #{variables.$value-of-win-address-bar-window-button-group-width-without-uizoomlevel} +
+                    1px
+            );
 
-    &.color-behind-tabs-off {
-      --vvh-address-bar-background-color: var(--colorAccentBg);
+            #{variables.$select-address-bar} {
+                .vivaldi {
+                    height: variables.$value-of-address-bar-height;
+                }
 
-      #{variables.$select-address-bar} {
-        .window-buttongroup > button {
-          fill: var(--colorFg);
+                .window-buttongroup {
+                    display: none;
+                }
+
+                &::before {
+                    display: none !important;
+                }
+            }
         }
 
-        .vivaldi {
-          color: var(--colorFg);
+        &.mac {
+            --vvh-address-bar-window-buttons-width: calc(
+                #{variables.$value-of-mac-disable-title-bar-address-bar-top-padding-left-without-uizoomlevel} +
+                    #{variables.$value-of-mac-address-bar-window-button-group-width-total-without-uizoomlevel}
+            );
+
+            #{variables.$select-address-bar} {
+                .window-buttongroup {
+                    display: none !important;
+                }
+
+                &::before {
+                    display: none !important;
+                }
+            }
         }
-      }
+
+        &.linux {
+            --vvh-address-bar-window-buttons-width: calc(
+                (
+                        var(--vvh-address-bar-menu-button-width) +
+                            #{variables.$value-of-linux-window-button-group-width}
+                    ) +
+                    #{variables.$value-of-window-edge-distance}
+            );
+
+            #{variables.$select-address-bar} {
+                .vivaldi {
+                    height: variables.$value-of-address-bar-height;
+                }
+
+                .window-buttongroup {
+                    display: none !important;
+                }
+
+                &::before {
+                    display: none !important;
+                }
+            }
+        }
     }
-
-    &.color-behind-tabs-on {
-      --vvh-address-bar-background-color: var(--colorBg);
-
-      #{variables.$select-address-bar} {
-        .window-buttongroup > button {
-          fill: var(--colorAccentFg);
-        }
-
-        .vivaldi {
-          color: var(--colorAccentFg);
-        }
-      }
-    }
-
-    &.transparent-tabbar:not(
-        .acc-dark.bg-dark.color-accent-from-page.color-behind-tabs-on
-      ) {
-      #{variables.$select-address-bar} {
-        .window-buttongroup > button {
-          fill: var(--colorImageFg, var(--colorFg));
-        }
-
-        .vivaldi {
-          color: var(--colorImageFg, var(--colorFg));
-        }
-      }
-    }
-
-    &:not(.transparent-tabbar) .mainbar::before {
-      background-color: var(--colorTabBar, transparent);
-    }
-
-    &.transparent-tabbar {
-      &.color-accent-from-page.color-behind-tabs-on {
-        .mainbar::before {
-          background-color: var(--colorAccentBg);
-          mix-blend-mode: multiply;
-        }
-      }
-
-      #{variables.$select-address-bar}::before {
-        background-color: var(--colorImageRightFgAlphaHeavy);
-        box-shadow: inset -1px 0 0 0 var(--colorImageRightFgAlphaHeavy);
-      }
-    }
-
-    // end window button colors
-
-    &.win {
-      --vvh-address-bar-window-buttons-width: calc(
-        var(--vvh-address-bar-menu-button-width) + #{variables.$value-of-win-address-bar-window-button-group-width-without-uizoomlevel} +
-          1px
-      );
-
-      #{variables.$select-address-bar} {
-        .vivaldi,
-        .window-buttongroup {
-          height: variables.$value-of-address-bar-height;
-        }
-
-        .window-buttongroup {
-          left: var(--vvh-address-bar-menu-button-width);
-          right: unset;
-
-          > .window-close:hover {
-            fill: #fff !important; // override all fill values set above
-          }
-        }
-      }
-    }
-
-    &.mac {
-      --vvh-address-bar-window-buttons-width: calc(
-        #{variables.$value-of-mac-disable-title-bar-address-bar-top-padding-left-without-uizoomlevel} +
-          #{variables.$value-of-mac-address-bar-window-button-group-width-total-without-uizoomlevel}
-      );
-
-      #{variables.$select-address-bar} {
-        .window-buttongroup {
-          position: absolute;
-          top: calc(
-            (
-                variables.$value-of-address-bar-height -
-                  variables.$value-of-mac-window-button-group-height
-              ) / 2
-          );
-          left: 0;
-          margin-left: calc(
-            variables.$value-of-mac-window-button-group-margin-left-without-uizoomlevel +
-              variables.$value-of-mac-disable-title-bar-address-bar-top-padding-left-without-uizoomlevel
-          );
-        }
-      }
-    }
-
-    &.linux {
-      --vvh-address-bar-window-buttons-width: calc(
-        (
-            var(--vvh-address-bar-menu-button-width) + #{variables.$value-of-linux-window-button-group-width}
-          ) + #{variables.$value-of-window-edge-distance}
-      );
-
-      #{variables.$select-address-bar} {
-        .vivaldi {
-          height: variables.$value-of-address-bar-height;
-        }
-
-        .window-buttongroup {
-          align-items: center;
-          top: calc(
-            (
-                variables.$value-of-address-bar-height -
-                  variables.$value-of-linux-window-button-group-height
-              ) / 2
-          );
-          left: var(--vvh-address-bar-menu-button-width);
-          right: unset;
-        }
-      }
-    }
-  }
 }
 
 @mixin universal-flex-grow {
-  #browser:is(.native, :not(.disable-titlebar)) {
-    #{variables.$select-address-bar} {
-      > :not(
-          #{variables.$select-search-field},
-          #{variables.$select-mail-search}
-        ) {
-        // exclude toolbar components with set width or flex-basis
-        flex-grow: 1;
-      }
+    #browser:is(.native, :not(.disable-titlebar)) {
+        #{variables.$select-address-bar} {
+            > :not(
+                    #{variables.$select-search-field},
+                    #{variables.$select-mail-search}
+                ) {
+                // exclude toolbar components with set width or flex-basis
+                flex-grow: 1;
+            }
 
-      > .workspace-popup {
-        max-width: unset;
+            > .workspace-popup {
+                max-width: unset;
 
-        > .ToolbarButton-Button {
-          .button-icon + .button-toolbar-menu-indicator {
-            margin-left: 0;
-          }
+                > .ToolbarButton-Button {
+                    .button-icon + .button-toolbar-menu-indicator {
+                        margin-left: 0;
+                    }
+                }
+            }
         }
-      }
-    }
-  }
-
-  #browser.disable-titlebar:not(.native) {
-    #{variables.$select-address-bar} {
-      > * {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      > .UrlBar-AddressField,
-      > .UrlBar-SearchField,
-      > .SearchField {
-        // .SearchField = mail search
-        margin-left: variables.$value-of-window-edge-distance;
-        margin-right: variables.$value-of-window-edge-distance;
-      }
     }
 
-    &.mac #{variables.$select-address-bar} > .window-buttongroup {
-      margin-left: calc(
-        variables.$value-of-mac-window-button-group-margin-left-without-uizoomlevel +
-          variables.$value-of-mac-disable-title-bar-address-bar-top-padding-left-without-uizoomlevel
-      );
-      margin-right: variables.$value-of-mac-address-bar-window-button-group-margin-right;
-    }
-  }
+    #browser.disable-titlebar:not(.native) {
+        #{variables.$select-address-bar} {
+            > * {
+                margin-left: auto;
+                margin-right: auto;
+            }
 
-  #browser:not(.toolbar-edit-mode)
-    #{variables.$select-address-bar}
-    #{variables.$select-flexible-space} {
-    display: none;
-  }
+            > .UrlBar-AddressField,
+            > .UrlBar-SearchField,
+            > .SearchField {
+                // .SearchField = mail search
+                margin-left: variables.$value-of-window-edge-distance;
+                margin-right: variables.$value-of-window-edge-distance;
+            }
+        }
+
+        &.mac #{variables.$select-address-bar} > .window-buttongroup {
+            margin-left: calc(
+                variables.$value-of-mac-window-button-group-margin-left-without-uizoomlevel +
+                    variables.$value-of-mac-disable-title-bar-address-bar-top-padding-left-without-uizoomlevel
+            );
+            margin-right: variables.$value-of-mac-address-bar-window-button-group-margin-right;
+        }
+    }
+
+    #browser:not(.toolbar-edit-mode)
+        #{variables.$select-address-bar}
+        #{variables.$select-flexible-space} {
+        display: none;
+    }
 }

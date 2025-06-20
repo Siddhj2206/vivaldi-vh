@@ -1,54 +1,68 @@
 @use "../variables";
 
 @mixin styles {
-  #{variables.$select-footer-has-status-bar} {
-    &:after {
-      content: none;
+    #{variables.$select-footer-has-status-bar} {
+        &:after {
+            content: none;
+        }
+
+        .toolbar-statusbar {
+            flex-wrap: wrap;
+            height: auto;
+        }
     }
 
-    .toolbar-statusbar {
-      flex-wrap: wrap;
-      height: auto;
+    .toolbar-statusbar > .button-toolbar > button,
+    .toolbar-statusbar .toolbar-extensions .button-toolbar > button,
+    .toolbar-statusbar .page-zoom-controls .button-toolbar > button {
+        min-width: 32px; // replicates the min-width set for this exact selector by the browser
     }
-  }
 
-  .toolbar-statusbar > .button-toolbar > button, .toolbar-statusbar .toolbar-extensions .button-toolbar > button, .toolbar-statusbar .page-zoom-controls .button-toolbar > button {
-    min-width: 32px; // replicates the min-width set for this exact selector by the browser
-  }
-
-  #main.left ~ footer > .toolbar-statusbar > .button-toolbar:first-of-type.panel-clickoutside-ignore button, #main.right ~ footer > .toolbar-statusbar > .button-toolbar:last-of-type.panel-clickoutside-ignore button {
-    min-width: 32px;
-    // The browser normally sets the min-width to 34px for this exact selector,
-    // the reason for that is unknown.
-    // It's linked to the panel position.
-  }
+    #main.left
+        ~ footer
+        > .toolbar-statusbar
+        > .button-toolbar:first-of-type.panel-clickoutside-ignore
+        button,
+    #main.right
+        ~ footer
+        > .toolbar-statusbar
+        > .button-toolbar:last-of-type.panel-clickoutside-ignore
+        button {
+        min-width: 32px;
+        // The browser normally sets the min-width to 34px for this exact selector,
+        // the reason for that is unknown.
+        // It's linked to the panel position.
+    }
 }
 
 @mixin universal-flex-grow {
-  #{variables.$select-status-bar} {
-    > :not(
-      #{variables.$select-search-field},
-      #{variables.$select-mail-search}
-    ) { // exclude toolbar components with set width or flex-basis
-      flex-grow: 1;
-    }
-
-    > .workspace-popup {
-      max-width: unset;
-
-      > .ToolbarButton-Button {
-        .button-icon + .button-toolbar-menu-indicator {
-          margin-left: 0;
+    #{variables.$select-status-bar} {
+        > :not(
+                #{variables.$select-search-field},
+                #{variables.$select-mail-search}
+            ) {
+            // exclude toolbar components with set width or flex-basis
+            flex-grow: 1;
         }
-      }
+
+        > .workspace-popup {
+            max-width: unset;
+
+            > .ToolbarButton-Button {
+                .button-icon + .button-toolbar-menu-indicator {
+                    margin-left: 0;
+                }
+            }
+        }
+
+        .button-toolbar button:hover {
+            background-color: var(--colorBgDark);
+        }
     }
 
-    .button-toolbar button:hover {
-      background-color: var(--colorBgDark);
+    #browser:not(.toolbar-edit-mode)
+        #{variables.$select-status-bar}
+        #{variables.$select-flexible-space} {
+        display: none;
     }
-  }
-
-  #browser:not(.toolbar-edit-mode) #{variables.$select-status-bar} #{variables.$select-flexible-space} {
-    display: none;
-  }
 }

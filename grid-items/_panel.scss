@@ -1,26 +1,26 @@
 @use "../variables";
 
 @mixin styles {
-  #{variables.$select-panel} {
-    max-width: unset;
-    border-color: var(--colorBorder);
+    #{variables.$select-panel} {
+        max-width: unset;
+        border-color: var(--colorBorder);
 
-    &.overlay {
-      position: relative; // overrides position: absolute on #panels-container.overlay set by the browser
-      inset: 0;
-    }
-  }
-
-  #browser.tabs-off #{variables.$select-panel} {
-    // The panel is inside the Pillar.
-    // The following styles make it as difficult as possible to close the panel.
-
-    .button-toolbar.active {
-      pointer-events: none;
+        &.overlay {
+            position: relative; // overrides position: absolute on #panels-container.overlay set by the browser
+            inset: 0;
+        }
     }
 
-    .panel .close {
-      display: none;
+    #browser.tabs-off #{variables.$select-panel} {
+        // The panel is inside the Pillar.
+        // The following styles make it as difficult as possible to close the panel.
+
+        .button-toolbar.active {
+            pointer-events: none;
+        }
+
+        .panel .close {
+            display: none;
+        }
     }
-  }
 }
